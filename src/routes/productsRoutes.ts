@@ -12,7 +12,7 @@ const router = Router();
  *     summary: Get all products paged
  *     responses:
  *       200:
- *         description: List of products
+ *         description: Paginated ist of products
  *         content:
  *           application/json:
  *             schema:
