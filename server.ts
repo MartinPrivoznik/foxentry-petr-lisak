@@ -1,7 +1,6 @@
-import 'module-alias/register';
-import logger from '@/utils/logger';
+import logger from '#utils/logger';
 import app from './src';
-import connectDatabase from '@/database/db';
+import connectDatabase from '#database/db';
 
 const port = process.env.PORT || '3000';
 

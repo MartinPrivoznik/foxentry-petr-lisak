@@ -1,15 +1,22 @@
 import dotenv from 'dotenv';
 import express, { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerFile from './documentation/swagger_def.json';
+import swaggerJsDoc from 'swagger-jsdoc';
+import products from '#routes/products';
+import { errorHandler } from '#middleware/errorHandler';
+import { swaggerOptions } from '#documentation/swaggerOptions';
 
 dotenv.config();
 
 const app: Express = express();
 
-// Use JSON parser for all incoming requests
+const swaggerDoc = swaggerJsDoc(swaggerOptions);
+
 app.use(express.json());
 
-app.use('/api-reference', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/api/products', products);
+app.use('/api/reference', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+app.use(errorHandler);
 
 export default app;

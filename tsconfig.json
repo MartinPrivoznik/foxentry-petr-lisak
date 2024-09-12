@@ -11,10 +11,14 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "#*": ["*"]
     }
   },
-  "include": ["src/**/*.ts", "server.ts"],
-  "exclude": ["node_modules"],
-  "plugins": [{ "transform": "typescript-transform-paths" }]
+  "plugins": [
+    {
+      "transform": "typescript-transform-paths"
+    }
+  ],
+  "include": ["src/**/*", "server.ts"],
+  "exclude": ["node_modules"]
 }
