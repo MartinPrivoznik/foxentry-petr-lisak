@@ -1,5 +1,5 @@
-import logger from '#utils/logger';
 import mongoose from 'mongoose';
+import logger from '../utils/logger';
 
 /**
  * Connects to the MongoDB database. Exits the process if the connection fails.

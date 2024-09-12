@@ -9,16 +9,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {
-      "#*": ["*"]
-    }
+    "baseUrl": "."
   },
-  "plugins": [
-    {
-      "transform": "typescript-transform-paths"
-    }
-  ],
   "include": ["src/**/*", "server.ts"],
   "exclude": ["node_modules"]
 }

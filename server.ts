@@ -1,6 +1,6 @@
-import logger from '#utils/logger';
+import logger from './src/utils/logger';
 import app from './src';
-import connectDatabase from '#database/db';
+import connectDatabase from './src/database/db';
 
 const port = process.env.PORT || '3000';
 

@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 
 export const getAllProducts = (req: Request, res: Response) => {
-  throw Error;
   res.status(200).json('Hello world!');
 };
 
 export const getProductsPaged = (req: Request, res: Response) => {
-  throw Error;
+  throw Error('Pičo');
   res.status(200).json('Hello world!');
 };
 
