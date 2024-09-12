@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express, { Express } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
-import products from './routes/products';
+import products from './routes/productsRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { swaggerOptions } from './documentation/swaggerOptions';
 
