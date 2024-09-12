@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "target": "es2023",
-    "module": "commonjs",
+    "module": "CommonJS",
+    "moduleResolution": "node",
     "strict": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -10,11 +12,9 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]
-    },
+    }
   },
   "include": ["src/**/*.ts", "server.ts"],
   "exclude": ["node_modules"],
-  "plugins": [
-    { "transform": "typescript-transform-paths" }
-  ]
+  "plugins": [{ "transform": "typescript-transform-paths" }]
 }
