@@ -1,21 +1,19 @@
 import dotenv from 'dotenv';
 import express, { Express } from 'express';
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsDoc from 'swagger-jsdoc';
-import products from './routes/productsRoutes';
 import { errorHandler } from './middleware/errorHandler';
-import { swaggerOptions } from './documentation/swaggerOptions';
+import { RegisterRoutes } from './routes/routes';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDef from './documentation/swagger.json';
 
 dotenv.config();
 
 const app: Express = express();
 
-const swaggerDoc = swaggerJsDoc(swaggerOptions);
-
 app.use(express.json());
 
-app.use('/api/products', products);
-app.use('/api/reference', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use('/api/reference', swaggerUi.serve, swaggerUi.setup(swaggerDef));
+
+RegisterRoutes(app);
 
 app.use(errorHandler);
 

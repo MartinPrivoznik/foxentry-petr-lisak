@@ -46,7 +46,7 @@ export const deleteProduct = async (id: string): Promise<void> => {
   const res = await Product.findByIdAndDelete(id).exec();
 
   if (!res) {
-    logger.error(`[deleteProduct]: Product with id ${id} not found`);
+    logger.warn(`[deleteProduct]: Product with id ${id} not found`);
     throw new NotFoundError(`Product with id ${id} not found`);
   }
 };

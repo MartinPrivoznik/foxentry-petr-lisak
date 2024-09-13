@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongoose';
+
 export interface DeleteProductRequestParams {
-  id: string;
+  id: ObjectId;
 }

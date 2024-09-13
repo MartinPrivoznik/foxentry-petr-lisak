@@ -1,4 +1,4 @@
-import { Document, model, Schema, Types } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import {
   handleAddProductPriceUpdate,
   handleCascadeDeletePriceHistory,
@@ -6,8 +6,8 @@ import {
 
 const DOCUMENT_NAME = 'Product';
 
-export interface IProduct extends Document {
-  _id: Types.ObjectId;
+export interface IProduct {
+  _id: string;
   name: string;
   price: number;
   stock: number;

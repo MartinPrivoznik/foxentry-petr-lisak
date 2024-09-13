@@ -1,53 +1,68 @@
-import { Request, Response } from 'express';
 import {
   deleteProduct,
   getAllProducts,
   getProductsPaged,
 } from '../services/productsService';
-import { DeleteProductRequestParams } from './dto/deleteProductRequestParams';
 import { ApiResponse, BaseApiResponse } from './dto/ApiResponse';
 import { PagedList } from '../utils/dataStructures/PagedList';
 import { IProduct } from '../models/Product';
+import {
+  Controller,
+  Delete,
+  Get,
+  Path,
+  Post,
+  Put,
+  Query,
+  Route,
+  Tags,
+} from 'tsoa';
 
-export const getProductsPagedHandler = async (
-  req: Request,
-  res: Response<ApiResponse<PagedList<IProduct>>>
-) => {
-  const products = await getProductsPaged();
-  res.status(200).json({ success: true, data: products });
-};
+@Route('api/products')
+@Tags('Products')
+export class ProductsController extends Controller {
+  @Get()
+  public async getProductsPaged(
+    @Query() page?: number,
+    @Query() pageSize?: number
+  ): Promise<ApiResponse<PagedList<IProduct>>> {
+    const products = await getProductsPaged(page, pageSize);
+    return { success: true, data: products };
+  }
 
-export const getAllProductsHandler = async (
-  req: Request,
-  res: Response<ApiResponse<IProduct[]>>
-) => {
-  const products = await getAllProducts();
-  res.status(200).json({ success: true, data: products });
-};
+  @Get('all')
+  public async getAllProducts(): Promise<ApiResponse<IProduct[]>> {
+    const products = await getAllProducts();
+    return { success: true, data: products };
+  }
 
-export const fulltextSearchProductsHandler = (req: Request, res: Response) => {
-  res.status(200).json('Hello world!');
-};
+  @Get('search')
+  public async fulltextSearchProducts(
+    @Query() query: string
+  ): Promise<ApiResponse<IProduct[]>> {
+    throw new Error('Not implemented');
+  }
 
-export const searchProductsByStockQuantityHandler = (
-  req: Request,
-  res: Response
-) => {
-  res.status(200).json('Hello world!');
-};
+  @Get('searchByStockQuantity')
+  public async searchProductsByStockQuantity(): Promise<
+    ApiResponse<IProduct[]>
+  > {
+    throw new Error('Not implemented');
+  }
 
-export const addProductHandler = (req: Request, res: Response) => {
-  res.status(200).json('Hello world!');
-};
+  @Post('add')
+  public async addProduct(): Promise<BaseApiResponse> {
+    throw new Error('Not implemented');
+  }
 
-export const updateProductHandler = (req: Request, res: Response) => {
-  res.status(200).json('Hello world!');
-};
+  @Put('update')
+  public async updateProduct(): Promise<BaseApiResponse> {
+    throw new Error('Not implemented');
+  }
 
-export const deleteProductHandler = async (
-  req: Request<DeleteProductRequestParams>,
-  res: Response<BaseApiResponse>
-) => {
-  await deleteProduct(req.params.id);
-  res.status(200).json({ success: true, message: 'Product deleted' });
-};
+  @Delete('delete/{id}')
+  public async deleteProduct(@Path() id: string): Promise<BaseApiResponse> {
+    await deleteProduct(id);
+    return { success: true, message: 'Product deleted' };
+  }
+}

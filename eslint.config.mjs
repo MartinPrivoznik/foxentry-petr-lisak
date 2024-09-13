@@ -12,5 +12,8 @@ export default tseslint.config(
   prettierConfig,
   {
     ignores: ['node_modules', 'dist', 'jest.config.js'],
+    rules: {
+      '@typescript-eslint/ban-tslint-comment': 'off',
+    },
   }
 );
