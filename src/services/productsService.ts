@@ -39,12 +39,39 @@ export const getProductsPaged = async (
 };
 
 /**
+ * Returns a list of products that have a stock quantity between min and max
+ * @param min minimum stock quantity
+ * @param max maximum stock quantity
+ * @returns
+ */
+export const searchProductsByStockQuantity = async (
+  min: number,
+  max: number
+): Promise<IProduct[]> => {
+  return await Product.find().where('stock').gte(min).lte(max).exec();
+};
+
+/**
  * Creates a new product in the database
  * @param product Product to be added
  * @returns Product that was added with its id assigned
  */
 export const addProduct = async (product: IProduct): Promise<IProduct> => {
   return await Product.create(product);
+};
+
+/**
+ * Updates a product in the database. Returns true if the product was updated, false otherwise.
+ * @param product Updated product
+ * @returns true if the product was updated, false otherwise
+ */
+export const updateProduct = async (product: IProduct): Promise<void> => {
+  const res = await Product.updateOne({ _id: product._id }, product);
+
+  if (res.modifiedCount === 0) {
+    logger.warn(`[updateProduct]: Product with id ${product._id} not found`);
+    throw new NotFoundError(`Product with id ${product._id} not found`);
+  }
 };
 
 /**

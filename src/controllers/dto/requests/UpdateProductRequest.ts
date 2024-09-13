@@ -1,6 +1,6 @@
 import {
-  IsEmpty,
   IsInt,
+  IsMongoId,
   IsNumber,
   IsString,
   Max,
@@ -9,9 +9,9 @@ import {
 } from 'class-validator';
 import { IProduct } from '../../../models/Product';
 
-export class AddProductRequest implements IProduct {
-  @IsEmpty()
-  _id?: string;
+export default class UpdateProductRequest implements IProduct {
+  @IsMongoId()
+  _id!: string;
 
   @IsString()
   @MaxLength(255)

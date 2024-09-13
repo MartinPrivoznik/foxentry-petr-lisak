@@ -3,6 +3,8 @@ import {
   deleteProduct,
   getAllProducts,
   getProductsPaged,
+  searchProductsByStockQuantity,
+  updateProduct,
 } from '../services/productsService';
 import { ApiResponse, BaseApiResponse } from './dto/ApiResponse';
 import { PagedList } from '../utils/dataStructures/PagedList';
@@ -24,6 +26,8 @@ import GetProductsPagedRequestParams from './dto/requests/GetProductsPagedReques
 import { validateData } from '../utils/validators/classValidator';
 import { AddProductRequest } from './dto/requests/CreateProductRequest';
 import { requestValidationMiddleware } from '../middleware/requestValidationMiddleware';
+import UpdateProductRequest from './dto/requests/UpdateProductRequest';
+import GetSearchProductsByStockQuantityParams from './dto/requests/GetSearchProductsByStockQuantityParams';
 
 @Route('api/products')
 @Tags('Products')
@@ -60,10 +64,21 @@ export class ProductsController extends Controller {
   }
 
   @Get('searchByStockQuantity')
-  public async searchProductsByStockQuantity(): Promise<
-    ApiResponse<IProduct[]>
-  > {
-    throw new Error('Not implemented');
+  public async searchProductsByStockQuantity(
+    @Query() min?: number,
+    @Query() max?: number
+  ): Promise<ApiResponse<IProduct[]>> {
+    const queryParams = new GetSearchProductsByStockQuantityParams();
+    queryParams.min = min || queryParams.min;
+    queryParams.max = max || queryParams.max;
+
+    await validateData(queryParams, GetSearchProductsByStockQuantityParams);
+
+    const res = await searchProductsByStockQuantity(
+      queryParams.min,
+      queryParams.max
+    );
+    return { success: true, data: res };
   }
 
   @Post('add')
@@ -72,12 +87,18 @@ export class ProductsController extends Controller {
     @Body() req: AddProductRequest
   ): Promise<ApiResponse<IProduct>> {
     const res = await addProduct(req);
-    return { success: true, data: res };
+    return { success: true, data: res, message: 'Product added' };
   }
 
   @Put('update')
-  public async updateProduct(): Promise<BaseApiResponse> {
-    throw new Error('Not implemented');
+  public async updateProduct(
+    @Body() req: UpdateProductRequest
+  ): Promise<BaseApiResponse> {
+    await updateProduct(req);
+    return {
+      success: true,
+      message: 'Product updated',
+    };
   }
 
   @Delete('delete/{id}')

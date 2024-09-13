@@ -189,6 +189,32 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"UpdateProductRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"stock": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"price",
+					"stock",
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -196,7 +222,7 @@
 	"info": {
 		"title": "foxentry-petr-lisak",
 		"version": "1.0.0",
-		"description": "OPEN API dokumentace pro obchůdek Petra Lišáka",
+		"description": "Rozhraní pro pomoc se správou obchůdku panu Petru Lišákovi",
 		"contact": {
 			"name": "Martin Přívozník"
 		}
@@ -315,7 +341,26 @@
 					"Products"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "min",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "max",
+						"required": false,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
 		"/api/products/add": {
@@ -369,7 +414,17 @@
 					"Products"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateProductRequest"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/api/products/delete/{id}": {

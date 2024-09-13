@@ -1,7 +1,7 @@
 {
   "name": "foxentry-petr-lisak",
   "version": "1.0.0",
-  "description": "OPEN API dokumentace pro obchůdek Petra Lišáka",
+  "description": "Rozhraní pro pomoc se správou obchůdku panu Petru Lišákovi",
   "main": "dist/server.ts",
   "scripts": {
     "build": "npx tsoa spec-and-routes && npx tsc",

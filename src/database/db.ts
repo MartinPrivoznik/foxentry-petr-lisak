@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 import logger from '../utils/logger';
 
-// Sanitize data on every query
-mongoose.set('sanitizeFilter', true);
-
 /**
  * Connects to the MongoDB database. Exits the process if the connection fails.
  */

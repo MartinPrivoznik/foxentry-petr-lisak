@@ -7,8 +7,8 @@ import { ValidateError } from 'tsoa';
  * @param id Identifier to be validated
  * @throws The {@link ValidateError}
  */
-export function validateObjectId(id: string): void {
-  if (!Types.ObjectId.isValid(id)) {
+export function validateObjectId(id?: string): void {
+  if (!id || !Types.ObjectId.isValid(id)) {
     throw new ValidateError(
       { id: { message: 'Given id is not a valid ObjectId', value: id } },
       'Field validation'
