@@ -3,6 +3,7 @@ import { PagedList } from '../utils/dataStructures/PagedList';
 import Product, { IProduct } from '../models/Product';
 import logger from '../utils/logger';
 import NotFoundError from '../utils/exceptions/NotFoundError';
+import { validateObjectId } from '../utils/validators/mongoValidator';
 
 /**
  * Returns an array of all products included in the database
@@ -43,6 +44,8 @@ export const getProductsPaged = async (
  * @throws The {@link NotFoundError} if the product is not found
  */
 export const deleteProduct = async (id: string): Promise<void> => {
+  validateObjectId(id);
+
   const res = await Product.findByIdAndDelete(id).exec();
 
   if (!res) {

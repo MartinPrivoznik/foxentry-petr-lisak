@@ -35,12 +35,20 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "FieldErrors": {
+        "dataType": "refObject",
+        "properties": {
+        },
+        "additionalProperties": {"dataType":"nestedObjectLiteral","nestedProperties":{"value":{"dataType":"any"},"message":{"dataType":"string","required":true}}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ApiResponse_PagedList_IProduct__": {
         "dataType": "refObject",
         "properties": {
-            "data": {"ref":"PagedList_IProduct_","required":true},
             "message": {"dataType":"string"},
             "success": {"dataType":"boolean","required":true},
+            "validationErrors": {"ref":"FieldErrors"},
+            "data": {"ref":"PagedList_IProduct_","required":true},
         },
         "additionalProperties": false,
     },
@@ -48,9 +56,10 @@ const models: TsoaRoute.Models = {
     "ApiResponse_IProduct-Array_": {
         "dataType": "refObject",
         "properties": {
-            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IProduct"},"required":true},
             "message": {"dataType":"string"},
             "success": {"dataType":"boolean","required":true},
+            "validationErrors": {"ref":"FieldErrors"},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IProduct"},"required":true},
         },
         "additionalProperties": false,
     },
@@ -60,6 +69,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "message": {"dataType":"string"},
             "success": {"dataType":"boolean","required":true},
+            "validationErrors": {"ref":"FieldErrors"},
         },
         "additionalProperties": false,
     },
@@ -147,6 +157,7 @@ export function RegisterRoutes(app: Router) {
 
             async function ProductsController_fulltextSearchProducts(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    query: {"in":"query","name":"query","dataType":"string"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

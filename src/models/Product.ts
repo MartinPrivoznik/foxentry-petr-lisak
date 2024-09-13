@@ -27,7 +27,7 @@ const productSchema = new Schema<IProduct>(
 );
 
 // Cascade delete price history
-productSchema.pre('findOneAndDelete', handleCascadeDeletePriceHistory);
+productSchema.post('findOneAndDelete', handleCascadeDeletePriceHistory);
 
 // Add product price update to price history is price has changed on update
 productSchema.post('updateOne', handleAddProductPriceUpdate);

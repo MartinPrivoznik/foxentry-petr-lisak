@@ -17,6 +17,8 @@ import {
   Route,
   Tags,
 } from 'tsoa';
+import GetProductsPagedRequestParams from './dto/requests/GetProductsPagedRequestParams';
+import { validateData } from '../utils/validators/classValidator';
 
 @Route('api/products')
 @Tags('Products')
@@ -26,7 +28,16 @@ export class ProductsController extends Controller {
     @Query() page?: number,
     @Query() pageSize?: number
   ): Promise<ApiResponse<PagedList<IProduct>>> {
-    const products = await getProductsPaged(page, pageSize);
+    const queryParams = new GetProductsPagedRequestParams();
+    queryParams.page = page;
+    queryParams.pageSize = pageSize;
+
+    await validateData(queryParams, GetProductsPagedRequestParams);
+
+    const products = await getProductsPaged(
+      queryParams.page,
+      queryParams.pageSize
+    );
     return { success: true, data: products };
   }
 
@@ -38,7 +49,7 @@ export class ProductsController extends Controller {
 
   @Get('search')
   public async fulltextSearchProducts(
-    @Query() query: string
+    @Query() query?: string
   ): Promise<ApiResponse<IProduct[]>> {
     throw new Error('Not implemented');
   }
