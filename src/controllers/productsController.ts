@@ -1,11 +1,4 @@
-import {
-  addProduct,
-  deleteProduct,
-  getAllProducts,
-  getProductsPaged,
-  searchProductsByStockQuantity,
-  updateProduct,
-} from '../services/productsService';
+import * as productsService from '../services/productsService';
 import { ApiResponse, BaseApiResponse } from './dto/ApiResponse';
 import { PagedList } from '../utils/dataStructures/PagedList';
 import { IProduct } from '../models/Product';
@@ -43,7 +36,7 @@ export class ProductsController extends Controller {
 
     await validateData(queryParams, GetProductsPagedRequestParams);
 
-    const products = await getProductsPaged(
+    const products = await productsService.getProductsPaged(
       queryParams.page,
       queryParams.pageSize
     );
@@ -52,7 +45,7 @@ export class ProductsController extends Controller {
 
   @Get('all')
   public async getAllProducts(): Promise<ApiResponse<IProduct[]>> {
-    const products = await getAllProducts();
+    const products = await productsService.getAllProducts();
     return { success: true, data: products };
   }
 
@@ -60,7 +53,8 @@ export class ProductsController extends Controller {
   public async fulltextSearchProducts(
     @Query() query?: string
   ): Promise<ApiResponse<IProduct[]>> {
-    throw new Error('Not implemented');
+    const products = await productsService.fulltextSearchProducts(query);
+    return { success: true, data: products };
   }
 
   @Get('searchByStockQuantity')
@@ -74,7 +68,7 @@ export class ProductsController extends Controller {
 
     await validateData(queryParams, GetSearchProductsByStockQuantityParams);
 
-    const res = await searchProductsByStockQuantity(
+    const res = await productsService.searchProductsByStockQuantity(
       queryParams.min,
       queryParams.max
     );
@@ -86,7 +80,7 @@ export class ProductsController extends Controller {
   public async addProduct(
     @Body() req: AddProductRequest
   ): Promise<ApiResponse<IProduct>> {
-    const res = await addProduct(req);
+    const res = await productsService.addProduct(req);
     return { success: true, data: res, message: 'Product added' };
   }
 
@@ -94,7 +88,7 @@ export class ProductsController extends Controller {
   public async updateProduct(
     @Body() req: UpdateProductRequest
   ): Promise<BaseApiResponse> {
-    await updateProduct(req);
+    await productsService.updateProduct(req);
     return {
       success: true,
       message: 'Product updated',
@@ -103,7 +97,7 @@ export class ProductsController extends Controller {
 
   @Delete('delete/{id}')
   public async deleteProduct(@Path() id: string): Promise<BaseApiResponse> {
-    await deleteProduct(id);
+    await productsService.deleteProduct(id);
     return { success: true, message: 'Product deleted' };
   }
 }

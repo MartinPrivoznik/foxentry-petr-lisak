@@ -24,6 +24,9 @@ const productSchema = new Schema<IProduct>(
   }
 );
 
+// Add text index for search
+productSchema.index({ name: 'text' });
+
 // Cascade delete price history
 productSchema.post('findOneAndDelete', handleCascadeDeletePriceHistory);
 
