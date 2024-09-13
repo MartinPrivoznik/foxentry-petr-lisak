@@ -22,23 +22,12 @@
 					"stock": {
 						"type": "number",
 						"format": "double"
-					},
-					"createdAt": {
-						"type": "string",
-						"format": "date-time"
-					},
-					"updatedAt": {
-						"type": "string",
-						"format": "date-time"
 					}
 				},
 				"required": [
-					"_id",
 					"name",
 					"price",
-					"stock",
-					"createdAt",
-					"updatedAt"
+					"stock"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -132,6 +121,53 @@
 				"required": [
 					"success",
 					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_IProduct_": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"validationErrors": {
+						"$ref": "#/components/schemas/FieldErrors"
+					},
+					"data": {
+						"$ref": "#/components/schemas/IProduct"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AddProductRequest": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"stock": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"price",
+					"stock"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -291,7 +327,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/BaseApiResponse"
+									"$ref": "#/components/schemas/ApiResponse_IProduct_"
 								}
 							}
 						}
@@ -301,7 +337,17 @@
 					"Products"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddProductRequest"
+							}
+						}
+					}
+				}
 			}
 		},
 		"/api/products/update": {

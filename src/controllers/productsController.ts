@@ -1,4 +1,5 @@
 import {
+  addProduct,
   deleteProduct,
   getAllProducts,
   getProductsPaged,
@@ -7,9 +8,11 @@ import { ApiResponse, BaseApiResponse } from './dto/ApiResponse';
 import { PagedList } from '../utils/dataStructures/PagedList';
 import { IProduct } from '../models/Product';
 import {
+  Body,
   Controller,
   Delete,
   Get,
+  Middlewares,
   Path,
   Post,
   Put,
@@ -19,6 +22,8 @@ import {
 } from 'tsoa';
 import GetProductsPagedRequestParams from './dto/requests/GetProductsPagedRequestParams';
 import { validateData } from '../utils/validators/classValidator';
+import { AddProductRequest } from './dto/requests/CreateProductRequest';
+import { requestValidationMiddleware } from '../middleware/requestValidationMiddleware';
 
 @Route('api/products')
 @Tags('Products')
@@ -62,8 +67,12 @@ export class ProductsController extends Controller {
   }
 
   @Post('add')
-  public async addProduct(): Promise<BaseApiResponse> {
-    throw new Error('Not implemented');
+  @Middlewares([requestValidationMiddleware(AddProductRequest)])
+  public async addProduct(
+    @Body() req: AddProductRequest
+  ): Promise<ApiResponse<IProduct>> {
+    const res = await addProduct(req);
+    return { success: true, data: res };
   }
 
   @Put('update')

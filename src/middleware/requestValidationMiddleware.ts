@@ -7,7 +7,7 @@ export function requestValidationMiddleware<T extends object>(
 ) {
   return async (req: Request, _res: Response, next: NextFunction) => {
     try {
-      validateData(req.body, targetClass);
+      await validateData(req.body, targetClass);
       next();
     } catch (err) {
       next(err);

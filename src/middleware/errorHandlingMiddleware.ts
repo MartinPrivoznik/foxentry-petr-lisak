@@ -23,7 +23,7 @@ export const errorHandlingMiddleware = (
   } else if (err instanceof NotFoundError) {
     res.status(404).json({ success: false, message: err.message });
   } else {
-    logger.error(err.message);
+    logger.error(err);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 

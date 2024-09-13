@@ -7,12 +7,10 @@ import {
 const DOCUMENT_NAME = 'Product';
 
 export interface IProduct {
-  _id: string;
+  _id?: string;
   name: string;
   price: number;
   stock: number;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 const productSchema = new Schema<IProduct>(

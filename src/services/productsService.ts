@@ -39,6 +39,15 @@ export const getProductsPaged = async (
 };
 
 /**
+ * Creates a new product in the database
+ * @param product Product to be added
+ * @returns Product that was added with its id assigned
+ */
+export const addProduct = async (product: IProduct): Promise<IProduct> => {
+  return await Product.create(product);
+};
+
+/**
  * Finds a product by its id and tries to delete it. If the product is not found, a NotFoundError is thrown.
  * @param id id of the product to be deleted
  * @throws The {@link NotFoundError} if the product is not found

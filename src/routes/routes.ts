@@ -14,12 +14,10 @@ const models: TsoaRoute.Models = {
     "IProduct": {
         "dataType": "refObject",
         "properties": {
-            "_id": {"dataType":"string","required":true},
+            "_id": {"dataType":"string"},
             "name": {"dataType":"string","required":true},
             "price": {"dataType":"double","required":true},
             "stock": {"dataType":"double","required":true},
-            "createdAt": {"dataType":"datetime","required":true},
-            "updatedAt": {"dataType":"datetime","required":true},
         },
         "additionalProperties": false,
     },
@@ -60,6 +58,28 @@ const models: TsoaRoute.Models = {
             "success": {"dataType":"boolean","required":true},
             "validationErrors": {"ref":"FieldErrors"},
             "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IProduct"},"required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ApiResponse_IProduct_": {
+        "dataType": "refObject",
+        "properties": {
+            "message": {"dataType":"string"},
+            "success": {"dataType":"boolean","required":true},
+            "validationErrors": {"ref":"FieldErrors"},
+            "data": {"ref":"IProduct","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AddProductRequest": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"dataType":"string"},
+            "name": {"dataType":"string","required":true},
+            "price": {"dataType":"double","required":true},
+            "stock": {"dataType":"double","required":true},
         },
         "additionalProperties": false,
     },
@@ -216,6 +236,7 @@ export function RegisterRoutes(app: Router) {
 
             async function ProductsController_addProduct(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
+                    req: {"in":"body","name":"req","required":true,"ref":"AddProductRequest"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
