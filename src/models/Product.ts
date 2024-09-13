@@ -1,5 +1,8 @@
 import { Document, model, Schema, Types } from 'mongoose';
-import { handleAddProductPriceUpdate, handleCascadeDeletePriceHistory } from '../database/mongoMiddleware/productMiddleware';
+import {
+  handleAddProductPriceUpdate,
+  handleCascadeDeletePriceHistory,
+} from '../database/mongoMiddleware/productMiddleware';
 
 const DOCUMENT_NAME = 'Product';
 

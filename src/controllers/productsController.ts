@@ -7,7 +7,7 @@ export const getAllProductsHandler = async (req: Request, res: Response) => {
 };
 
 export const getProductsPagedHandler = async (req: Request, res: Response) => {
-  const products = await getProductsPaged()
+  const products = await getProductsPaged();
   res.status(200).json(products);
 };
 
@@ -27,6 +27,9 @@ export const fulltextSearchProductsHandler = (req: Request, res: Response) => {
   res.status(200).json('Hello world!');
 };
 
-export const searchProductsByStockQuantityHandler = (req: Request, res: Response) => {
+export const searchProductsByStockQuantityHandler = (
+  req: Request,
+  res: Response
+) => {
   res.status(200).json('Hello world!');
 };

@@ -8,8 +8,7 @@
     "start": "node dist/server.js",
     "dev": "npx nodemon",
     "test": "jest --watch",
-    "lint": "eslint .",
-    "swagger-autogen": "node swagger.mjs"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
