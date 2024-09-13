@@ -12,7 +12,7 @@ const router = Router();
  *     summary: Get all products paged
  *     responses:
  *       200:
- *         description: Paginated ist of products
+ *         description: Paginated list of products
  *         content:
  *           application/json:
  *             schema:
@@ -26,10 +26,10 @@ router.get('/all', products.getAllProductsHandler);
 router.get('/search', products.fulltextSearchProductsHandler);
 router.get('/stock', products.searchProductsByStockQuantityHandler);
 
-router.post('/addProduct', products.addProductHandler);
+router.post('/add', products.addProductHandler);
 
-router.put('/updateProduct', products.updateProductHandler);
+router.put('/update', products.updateProductHandler);
 
-router.delete('/:id', products.deleteProductHandler);
+router.delete('/delete/:id', products.deleteProductHandler);
 
 export default router;
