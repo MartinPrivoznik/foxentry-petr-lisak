@@ -10,7 +10,7 @@ import { validateObjectId } from '../utils/validators/mongoValidator';
  * @returns Array of all products
  */
 export const getAllProducts = async (): Promise<IProduct[]> => {
-  return await Product.find().exec();
+  return Product.find().exec();
 };
 
 /**
@@ -48,7 +48,7 @@ export const fulltextSearchProducts = async (
 ): Promise<IProduct[]> => {
   const regex = new RegExp(query ?? '', 'i');
 
-  return await Product.find({ name: { $regex: regex } }).exec();
+  return Product.find({ name: { $regex: regex } }).exec();
 };
 
 /**
@@ -61,7 +61,7 @@ export const searchProductsByStockQuantity = async (
   min: number,
   max: number
 ): Promise<IProduct[]> => {
-  return await Product.find().where('stock').gte(min).lte(max).exec();
+  return Product.find().where('stock').gte(min).lte(max).exec();
 };
 
 /**
@@ -70,7 +70,7 @@ export const searchProductsByStockQuantity = async (
  * @returns Product that was added with its id assigned
  */
 export const addProduct = async (product: IProduct): Promise<IProduct> => {
-  return await Product.create(product);
+  return Product.create(product);
 };
 
 /**
