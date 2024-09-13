@@ -1,10 +1,10 @@
 {
   "name": "foxentry-petr-lisak",
   "version": "1.0.0",
-  "description": "foxentry homework task",
+  "description": "OPEN API dokumentace pro obchůdek Petra Lišáka",
   "main": "dist/server.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsoa spec-and-routes && npx tsc",
     "start": "node dist/server.js",
     "dev": "npx tsoa spec-and-routes && npx nodemon",
     "test": "jest --watch",
@@ -15,7 +15,6 @@
     "url": "foxentry-petr-lisak"
   },
   "author": "Martin Přívozník",
-  "license": "ISC",
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",

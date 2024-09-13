@@ -160,10 +160,7 @@
 	"info": {
 		"title": "foxentry-petr-lisak",
 		"version": "1.0.0",
-		"description": "foxentry homework task",
-		"license": {
-			"name": "ISC"
-		},
+		"description": "OPEN API dokumentace pro obchůdek Petra Lišáka",
 		"contact": {
 			"name": "Martin Přívozník"
 		}
