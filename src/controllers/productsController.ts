@@ -85,6 +85,7 @@ export class ProductsController extends Controller {
   }
 
   @Put('update')
+  @Middlewares([requestValidationMiddleware(UpdateProductRequest)])
   public async updateProduct(
     @Body() req: UpdateProductRequest
   ): Promise<BaseApiResponse> {
