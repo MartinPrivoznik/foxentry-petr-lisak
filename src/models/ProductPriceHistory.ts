@@ -6,12 +6,14 @@ export interface IProductPriceHistory extends Document {
   _id: Types.ObjectId;
   oldPrice: number;
   newPrice: number;
+  updatedDate: Date;
   productId: Types.ObjectId;
 }
 
 const productPriceHistorySchema = new Schema<IProductPriceHistory>({
   oldPrice: { type: Number, required: true },
   newPrice: { type: Number, required: true },
+  updatedDate: { type: Date, default: Date.now, required: true },
   productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
 });
 

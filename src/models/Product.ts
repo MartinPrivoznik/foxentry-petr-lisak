@@ -30,8 +30,8 @@ productSchema.index({ name: 'text' });
 // Cascade delete price history
 productSchema.post('findOneAndDelete', handleCascadeDeletePriceHistory);
 
-// Add product price update to price history is price has changed on update
-productSchema.post('updateOne', handleAddProductPriceUpdate);
+// Add product price update to price history if price has changed on update
+productSchema.pre('updateOne', handleAddProductPriceUpdate);
 
 const Product = model<IProduct>(DOCUMENT_NAME, productSchema);
 export default Product;

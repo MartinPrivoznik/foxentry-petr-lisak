@@ -43,9 +43,7 @@ export const getProductsPaged = async (
  * @param query string query to be used in the search
  * @returns array of products that match the query
  */
-export const fulltextSearchProducts = async (
-  query?: string
-): Promise<IProduct[]> => {
+export const fulltextSearchProducts = (query?: string): Promise<IProduct[]> => {
   const regex = new RegExp(query ?? '', 'i');
 
   return Product.find({ name: { $regex: regex } }).exec();
@@ -57,7 +55,7 @@ export const fulltextSearchProducts = async (
  * @param max maximum stock quantity
  * @returns
  */
-export const searchProductsByStockQuantity = async (
+export const searchProductsByStockQuantity = (
   min: number,
   max: number
 ): Promise<IProduct[]> => {
@@ -69,7 +67,7 @@ export const searchProductsByStockQuantity = async (
  * @param product Product to be added
  * @returns Product that was added with its id assigned
  */
-export const addProduct = async (product: IProduct): Promise<IProduct> => {
+export const addProduct = (product: IProduct): Promise<IProduct> => {
   return Product.create(product);
 };
 
