@@ -129,7 +129,7 @@ export function RegisterRoutes(app: Router) {
             async function ProductsController_getProductsPaged(request: ExRequest, response: ExResponse, next: any) {
             const args: Record<string, TsoaRoute.ParameterSchema> = {
                     page: {"in":"query","name":"page","dataType":"double"},
-                    pageSize: {"in":"query","name":"pageSize","dataType":"double"},
+                    offset: {"in":"query","name":"offset","dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

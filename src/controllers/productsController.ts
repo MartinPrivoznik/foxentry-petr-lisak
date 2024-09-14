@@ -25,14 +25,21 @@ import GetSearchProductsByStockQuantityParams from './dto/requests/GetSearchProd
 @Route('api/products')
 @Tags('Products')
 export class ProductsController extends Controller {
+  /**
+   * Retrieves a paged list of products based on page and page size.
+   * @param page page to be used in output. Default value is 1
+   * @param offset page size to be used in output. Default value is 10
+   * @example page 1
+   * @example offset 10
+   */
   @Get()
   public async getProductsPaged(
     @Query() page?: number,
-    @Query() pageSize?: number
+    @Query() offset?: number
   ): Promise<ApiResponse<PagedList<IProduct>>> {
     const queryParams = new GetProductsPagedRequestParams();
     queryParams.page = page;
-    queryParams.pageSize = pageSize;
+    queryParams.pageSize = offset;
 
     await validateData(queryParams, GetProductsPagedRequestParams);
 
@@ -43,12 +50,20 @@ export class ProductsController extends Controller {
     return { success: true, data: products };
   }
 
+  /**
+   * Retrieves an array of all products included in the database
+   */
   @Get('all')
   public async getAllProducts(): Promise<ApiResponse<IProduct[]>> {
     const products = await productsService.getAllProducts();
     return { success: true, data: products };
   }
 
+  /**
+   * Performs a fulltext search on the products collection based on the query parameter
+   * @param query string query to be used in the search
+   * @example query "prod"
+   */
   @Get('search')
   public async fulltextSearchProducts(
     @Query() query?: string
@@ -57,6 +72,13 @@ export class ProductsController extends Controller {
     return { success: true, data: products };
   }
 
+  /**
+   * Returns a list of products that have a stock quantity between min and max
+   * @param min minimum stock quantity
+   * @param max maximum stock quantity
+   * @example min 5
+   * @example max 10
+   */
   @Get('searchByStockQuantity')
   public async searchProductsByStockQuantity(
     @Query() min?: number,
@@ -75,6 +97,10 @@ export class ProductsController extends Controller {
     return { success: true, data: res };
   }
 
+  /**
+   * Adds a new product to the database
+   * @param req Request body containing the product data
+   */
   @Post('add')
   @Middlewares([requestValidationMiddleware(AddProductRequest)])
   public async addProduct(
@@ -84,6 +110,10 @@ export class ProductsController extends Controller {
     return { success: true, data: res, message: 'Product added' };
   }
 
+  /**
+   * Updates a product in the database
+   * @param req Request body containing the product data
+   */
   @Put('update')
   @Middlewares([requestValidationMiddleware(UpdateProductRequest)])
   public async updateProduct(
@@ -96,6 +126,11 @@ export class ProductsController extends Controller {
     };
   }
 
+  /**
+   * Deletes a product from the database
+   * @param id id of the product to be deleted
+   * @example id "507f191e810c19729de860ea"
+   */
   @Delete('delete/{id}')
   public async deleteProduct(@Path() id: string): Promise<BaseApiResponse> {
     await productsService.deleteProduct(id);

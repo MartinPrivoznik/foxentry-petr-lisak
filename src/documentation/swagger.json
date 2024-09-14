@@ -148,20 +148,24 @@
 				"additionalProperties": false
 			},
 			"AddProductRequest": {
+				"description": "Request body for adding a new product to store.",
 				"properties": {
 					"_id": {
 						"type": "string"
 					},
 					"name": {
-						"type": "string"
+						"type": "string",
+						"description": "Product name"
 					},
 					"price": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Product price"
 					},
 					"stock": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Product stock quantity"
 					}
 				},
 				"required": [
@@ -170,7 +174,12 @@
 					"stock"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"additionalProperties": false,
+				"example": {
+					"name": "Product example",
+					"price": 420.69,
+					"stock": 8
+				}
 			},
 			"BaseApiResponse": {
 				"properties": {
@@ -191,20 +200,25 @@
 				"additionalProperties": false
 			},
 			"UpdateProductRequest": {
+				"description": "Request body for updating product in store.",
 				"properties": {
 					"_id": {
-						"type": "string"
+						"type": "string",
+						"description": "Product id. Must be a valid MongoDB ObjectId."
 					},
 					"name": {
-						"type": "string"
+						"type": "string",
+						"description": "Product name"
 					},
 					"price": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Product price"
 					},
 					"stock": {
 						"type": "number",
-						"format": "double"
+						"format": "double",
+						"description": "Product stock quantity"
 					}
 				},
 				"required": [
@@ -214,7 +228,13 @@
 					"_id"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"additionalProperties": false,
+				"example": {
+					"_id": "507f191e810c19729de860ea",
+					"name": "Product renamed",
+					"price": 420.69,
+					"stock": 9
+				}
 			}
 		},
 		"securitySchemes": {}
@@ -243,28 +263,33 @@
 						}
 					}
 				},
+				"description": "Retrieves a paged list of products based on page and page size.",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "page to be used in output. Default value is 1",
 						"in": "query",
 						"name": "page",
 						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"
-						}
+						},
+						"example": 1
 					},
 					{
+						"description": "page size to be used in output. Default value is 10",
 						"in": "query",
-						"name": "pageSize",
+						"name": "offset",
 						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"
-						}
+						},
+						"example": 10
 					}
 				]
 			}
@@ -284,6 +309,7 @@
 						}
 					}
 				},
+				"description": "Retrieves an array of all products included in the database",
 				"tags": [
 					"Products"
 				],
@@ -306,18 +332,21 @@
 						}
 					}
 				},
+				"description": "Performs a fulltext search on the products collection based on the query parameter",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "string query to be used in the search",
 						"in": "query",
 						"name": "query",
 						"required": false,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "prod"
 					}
 				]
 			}
@@ -337,28 +366,33 @@
 						}
 					}
 				},
+				"description": "Returns a list of products that have a stock quantity between min and max",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "minimum stock quantity",
 						"in": "query",
 						"name": "min",
 						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"
-						}
+						},
+						"example": 5
 					},
 					{
+						"description": "maximum stock quantity",
 						"in": "query",
 						"name": "max",
 						"required": false,
 						"schema": {
 							"format": "double",
 							"type": "number"
-						}
+						},
+						"example": 10
 					}
 				]
 			}
@@ -378,17 +412,20 @@
 						}
 					}
 				},
+				"description": "Adds a new product to the database",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "Request body containing the product data",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/AddProductRequest"
+								"$ref": "#/components/schemas/AddProductRequest",
+								"description": "Request body containing the product data"
 							}
 						}
 					}
@@ -410,17 +447,20 @@
 						}
 					}
 				},
+				"description": "Updates a product in the database",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "Request body containing the product data",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateProductRequest"
+								"$ref": "#/components/schemas/UpdateProductRequest",
+								"description": "Request body containing the product data"
 							}
 						}
 					}
@@ -442,18 +482,21 @@
 						}
 					}
 				},
+				"description": "Deletes a product from the database",
 				"tags": [
 					"Products"
 				],
 				"security": [],
 				"parameters": [
 					{
+						"description": "id of the product to be deleted",
 						"in": "path",
 						"name": "id",
 						"required": true,
 						"schema": {
 							"type": "string"
-						}
+						},
+						"example": "507f191e810c19729de860ea"
 					}
 				]
 			}
