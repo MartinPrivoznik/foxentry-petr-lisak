@@ -235,6 +235,65 @@
 					"price": 420.69,
 					"stock": 9
 				}
+			},
+			"mongoose.Types.ObjectId": {
+				"type": "string"
+			},
+			"IProductPriceHistory": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"oldPrice": {
+						"type": "number",
+						"format": "double"
+					},
+					"newPrice": {
+						"type": "number",
+						"format": "double"
+					},
+					"updatedDate": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"productId": {
+						"$ref": "#/components/schemas/mongoose.Types.ObjectId"
+					}
+				},
+				"required": [
+					"_id",
+					"oldPrice",
+					"newPrice",
+					"updatedDate",
+					"productId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_IProductPriceHistory-Array_": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"validationErrors": {
+						"$ref": "#/components/schemas/FieldErrors"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/IProductPriceHistory"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -499,6 +558,29 @@
 						"example": "507f191e810c19729de860ea"
 					}
 				]
+			}
+		},
+		"/api/priceChanges": {
+			"get": {
+				"operationId": "GetAllPriceChanges",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_IProductPriceHistory-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves all records of price changes for all products.\r\nMostly here so you dont have to check it directly in the database ;)",
+				"tags": [
+					"Price changes"
+				],
+				"security": [],
+				"parameters": []
 			}
 		}
 	},

@@ -4,6 +4,8 @@
 import { TsoaRoute, fetchMiddlewares, ExpressTemplateService } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ProductsController } from './../controllers/productsController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { PriceChangesController } from './../controllers/priceChangesController';
 import type { Request as ExRequest, Response as ExResponse, RequestHandler, Router } from 'express';
 
 
@@ -101,6 +103,34 @@ const models: TsoaRoute.Models = {
             "name": {"dataType":"string","required":true},
             "price": {"dataType":"double","required":true},
             "stock": {"dataType":"double","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "mongoose.Types.ObjectId": {
+        "dataType": "refAlias",
+        "type": {"dataType":"string","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IProductPriceHistory": {
+        "dataType": "refObject",
+        "properties": {
+            "_id": {"dataType":"string","required":true},
+            "oldPrice": {"dataType":"double","required":true},
+            "newPrice": {"dataType":"double","required":true},
+            "updatedDate": {"dataType":"datetime","required":true},
+            "productId": {"ref":"mongoose.Types.ObjectId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ApiResponse_IProductPriceHistory-Array_": {
+        "dataType": "refObject",
+        "properties": {
+            "message": {"dataType":"string"},
+            "success": {"dataType":"boolean","required":true},
+            "validationErrors": {"ref":"FieldErrors"},
+            "data": {"dataType":"array","array":{"dataType":"refObject","ref":"IProductPriceHistory"},"required":true},
         },
         "additionalProperties": false,
     },
@@ -322,6 +352,35 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'deleteProduct',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: undefined,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/api/priceChanges',
+            ...(fetchMiddlewares<RequestHandler>(PriceChangesController)),
+            ...(fetchMiddlewares<RequestHandler>(PriceChangesController.prototype.getAllPriceChanges)),
+
+            async function PriceChangesController_getAllPriceChanges(request: ExRequest, response: ExResponse, next: any) {
+            const args: Record<string, TsoaRoute.ParameterSchema> = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args, request, response });
+
+                const controller = new PriceChangesController();
+
+              await templateService.apiHandler({
+                methodName: 'getAllPriceChanges',
                 controller,
                 response,
                 next,

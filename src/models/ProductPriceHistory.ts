@@ -1,9 +1,9 @@
-import { Document, model, Schema, Types } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
 const DOCUMENT_NAME = 'ProductPriceHistory';
 
-export interface IProductPriceHistory extends Document {
-  _id: Types.ObjectId;
+export interface IProductPriceHistory {
+  _id: string;
   oldPrice: number;
   newPrice: number;
   updatedDate: Date;
