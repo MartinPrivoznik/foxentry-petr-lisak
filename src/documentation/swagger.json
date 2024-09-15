@@ -575,12 +575,45 @@
 						}
 					}
 				},
-				"description": "Retrieves all records of price changes for all products.\r\nMostly here so you dont have to check it directly in the database ;)",
+				"description": "Retrieves all records of price changes for all products.",
 				"tags": [
 					"Price changes"
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/api/priceChanges/{productId}": {
+			"get": {
+				"operationId": "GetPriceChangesByProductId",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_IProductPriceHistory-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves all records of price changes for single product by its id.",
+				"tags": [
+					"Price changes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "productId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "5f4f5b3b4f5b3b4f5b3b4f5b"
+					}
+				]
 			}
 		}
 	},
