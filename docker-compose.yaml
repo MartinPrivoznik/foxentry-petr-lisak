@@ -1,0 +1,29 @@
+services:
+  # Node.js service
+  app:
+    build: .
+    container_name: node-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      DATABASE_URL: mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+
+  # MongoDB service
+  mongo:
+    image: mongo:6.0
+    container_name: mongo-db
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+# Volumes
+volumes:
+  mongo-data:
