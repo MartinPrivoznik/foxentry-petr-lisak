@@ -6,7 +6,7 @@ import { ValidateError } from 'tsoa';
  * Data validation function.
  * Accepts data and target class and validates the data against the class.
  * Throws a ValidateError if validation fails for compatibility with TSOA.
- * See {@module class-validator} for more information.
+ * See {@link class-validator} for more information.
  * @param data Data to be validated
  * @param targetClass Class to validate the data against
  * @throws The {@link ValidateError}
