@@ -27,6 +27,10 @@ Application contains a _dockerfile_ alongside with _docker-compose.yaml_. Can be
 
 1) `docker-compose up --build`
 
+## OpenAPI
+
+After application is running, the API documentation can be found on endpoint `/api/reference`
+
 ## Used technologies
 
 - Node.js runtime
