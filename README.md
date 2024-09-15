@@ -41,3 +41,5 @@ After application is running, the API documentation can be found on endpoint `/a
 - mongoose as ORM
 - pino for logging
 - jest for unit testing
+
+![jslib](https://devs.lol/uploads/2021/11/meme-dev-humor-every-day-there-is-a-new-javascript-framework-86.jpg)
