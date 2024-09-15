@@ -21,6 +21,12 @@ However, your unit test database user needs a database deletion rights to clean 
 
 1) `npm run test`
 
+### Docker
+
+Application contains a _dockerfile_ alongside with _docker-compose.yaml_. Can be ran using docker if needed.
+
+1) `docker-compose up --build`
+
 ## Used technologies
 
 - Node.js runtime
