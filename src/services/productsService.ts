@@ -14,6 +14,15 @@ export const getAllProducts = async (): Promise<IProduct[]> => {
 };
 
 /**
+ * Returns a single product by its id
+ * @param id id of the product to be returned
+ * @returns Found product
+ */
+export const getProductById = async (id: string): Promise<IProduct> => {
+  return Product.findById(id).exec() as Promise<IProduct>;
+};
+
+/**
  * Returns a paged list of products based on page and page size. See {@link PagedList} for more details.
  * @param page page to be used in output. Default value is 1
  * @param pageSize count of items per page. Default value is 10
