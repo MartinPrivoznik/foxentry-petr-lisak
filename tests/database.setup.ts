@@ -20,7 +20,7 @@ afterEach(async () => {
 });
 
 const mockDatabaseData = async () => {
-  mongoose.connection
+  await mongoose.connection
     .collection<IProduct>('products')
     .insertMany([
       products.product1,
