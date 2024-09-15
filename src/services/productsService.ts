@@ -59,6 +59,12 @@ export const searchProductsByStockQuantity = (
   min: number,
   max: number
 ): Promise<IProduct[]> => {
+  if (min > max) {
+    throw Error(
+      'Minimum stock quantity cannot be greater than maximum stock quantity'
+    );
+  }
+
   return Product.find().where('stock').gte(min).lte(max).exec();
 };
 
