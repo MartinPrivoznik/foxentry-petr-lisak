@@ -19,6 +19,7 @@ export const getAllProducts = async (): Promise<IProduct[]> => {
  * @returns Found product
  */
 export const getProductById = async (id: string): Promise<IProduct> => {
+  validateObjectId(id);
   return Product.findById(id).exec() as Promise<IProduct>;
 };
 
