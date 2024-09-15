@@ -37,6 +37,13 @@ describe('getProductsPaged', () => {
     expect(products.totalRecords).toBe(6);
   });
 
+  it('Should return second page of products', async () => {
+    const products = await productsService.getProductsPaged(2, 4);
+
+    expect(products.items).toHaveLength(2);
+    expect(products.totalRecords).toBe(6);
+  });
+
   it('Should return paged list of products with default values', async () => {
     const products = await productsService.getProductsPaged();
 
