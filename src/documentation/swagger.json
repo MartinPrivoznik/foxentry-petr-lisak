@@ -32,36 +32,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"PagedList_IProduct_": {
-				"properties": {
-					"items": {
-						"items": {
-							"$ref": "#/components/schemas/IProduct"
-						},
-						"type": "array"
-					},
-					"totalRecords": {
-						"type": "number",
-						"format": "double"
-					},
-					"currentPage": {
-						"type": "number",
-						"format": "double"
-					},
-					"offset": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"required": [
-					"items",
-					"totalRecords",
-					"currentPage",
-					"offset"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"FieldErrors": {
 				"properties": {},
 				"type": "object",
@@ -77,28 +47,6 @@
 					],
 					"type": "object"
 				}
-			},
-			"ApiResponse_PagedList_IProduct__": {
-				"properties": {
-					"message": {
-						"type": "string"
-					},
-					"success": {
-						"type": "boolean"
-					},
-					"validationErrors": {
-						"$ref": "#/components/schemas/FieldErrors"
-					},
-					"data": {
-						"$ref": "#/components/schemas/PagedList_IProduct_"
-					}
-				},
-				"required": [
-					"success",
-					"data"
-				],
-				"type": "object",
-				"additionalProperties": false
 			},
 			"ApiResponse_IProduct-Array_": {
 				"properties": {
@@ -138,6 +86,58 @@
 					},
 					"data": {
 						"$ref": "#/components/schemas/IProduct"
+					}
+				},
+				"required": [
+					"success",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PagedList_IProduct_": {
+				"properties": {
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/IProduct"
+						},
+						"type": "array"
+					},
+					"totalRecords": {
+						"type": "number",
+						"format": "double"
+					},
+					"currentPage": {
+						"type": "number",
+						"format": "double"
+					},
+					"offset": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"items",
+					"totalRecords",
+					"currentPage",
+					"offset"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ApiResponse_PagedList_IProduct__": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"success": {
+						"type": "boolean"
+					},
+					"validationErrors": {
+						"$ref": "#/components/schemas/FieldErrors"
+					},
+					"data": {
+						"$ref": "#/components/schemas/PagedList_IProduct_"
 					}
 				},
 				"required": [
@@ -309,6 +309,63 @@
 	"paths": {
 		"/api/products": {
 			"get": {
+				"operationId": "GetAllProducts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_IProduct-Array_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves an array of all products included in the database",
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/api/products/{id}": {
+			"get": {
+				"operationId": "GetProductById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse_IProduct_"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieves a product by its id",
+				"tags": [
+					"Products"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"description": "id of the product to be found",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						},
+						"example": "507f191e810c19729de860ea"
+					}
+				]
+			}
+		},
+		"/api/products/paged": {
+			"get": {
 				"operationId": "GetProductsPaged",
 				"responses": {
 					"200": {
@@ -351,29 +408,6 @@
 						"example": 10
 					}
 				]
-			}
-		},
-		"/api/products/all": {
-			"get": {
-				"operationId": "GetAllProducts",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/ApiResponse_IProduct-Array_"
-								}
-							}
-						}
-					}
-				},
-				"description": "Retrieves an array of all products included in the database",
-				"tags": [
-					"Products"
-				],
-				"security": [],
-				"parameters": []
 			}
 		},
 		"/api/products/search": {

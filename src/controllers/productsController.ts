@@ -26,13 +26,35 @@ import GetSearchProductsByStockQuantityParams from './dto/requests/GetSearchProd
 @Tags('Products')
 export class ProductsController extends Controller {
   /**
+   * Retrieves an array of all products included in the database
+   */
+  @Get()
+  public async getAllProducts(): Promise<ApiResponse<IProduct[]>> {
+    const products = await productsService.getAllProducts();
+    return { success: true, data: products };
+  }
+
+  /**
+   * Retrieves a product by its id
+   * @param id id of the product to be found
+   * @example id "507f191e810c19729de860ea"
+   */
+  @Get('{id}')
+  public async getProductById(
+    @Path() id: string
+  ): Promise<ApiResponse<IProduct>> {
+    const product = await productsService.getProductById(id);
+    return { success: true, data: product };
+  }
+
+  /**
    * Retrieves a paged list of products based on page and page size.
    * @param page page to be used in output. Default value is 1
    * @param offset page size to be used in output. Default value is 10
    * @example page 1
    * @example offset 10
    */
-  @Get()
+  @Get('paged')
   public async getProductsPaged(
     @Query() page?: number,
     @Query() offset?: number
@@ -47,15 +69,6 @@ export class ProductsController extends Controller {
       queryParams.page,
       queryParams.pageSize
     );
-    return { success: true, data: products };
-  }
-
-  /**
-   * Retrieves an array of all products included in the database
-   */
-  @Get('all')
-  public async getAllProducts(): Promise<ApiResponse<IProduct[]>> {
-    const products = await productsService.getAllProducts();
     return { success: true, data: products };
   }
 
