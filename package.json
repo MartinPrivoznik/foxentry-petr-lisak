@@ -5,9 +5,9 @@
   "main": "dist/server.ts",
   "scripts": {
     "build": "npx tsoa spec-and-routes && npx tsc",
-    "start": "node dist/server.js",
+    "start": "npx cross-env NODE_ENV=production node dist/server.js",
     "dev": "npx tsoa spec-and-routes && npx nodemon",
-    "test": "jest --watch",
+    "test": "jest",
     "lint": "eslint ."
   },
   "repository": {
@@ -35,6 +35,7 @@
     "@types/swagger-ui-express": "^4.1.6",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.5.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
